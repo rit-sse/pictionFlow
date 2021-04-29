@@ -3,7 +3,7 @@
     <br>
     <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logo.PNG" width="600" alt = "pictionflow">
 </h1>
-<h4 align="center" style="font-size:10000%:">An IOS (for the meantime) game for guessing doodles.</h4>
+<h4 align="center" style="font-size:10000%:">An iOS (for the meantime) game for guessing doodles.</h4>
 
 <p align="center" style="font-size:180%;">
     PictionFlow will be a mobile application seeded with data from <a href="https://github.com/googlecreativelab/quickdraw-dataset" target="_blank">Quick, Draw!</a>
@@ -40,7 +40,7 @@ We will have to acquire an SSL certificate, and use HTTPS.
 >I will update more on the API shortly.
 </p2>
 <br>
-<h2 align="left">IOS/Android Application(Client)</h2>
+<h2 align="left">iOS/Android Application(Client)</h2>
 <p2 align="left">
 The application will most likely be an IOS application developed in swift. The application will employ a canvas that allows the user to draw. The application will likely have to be multi-threaded, as to allow the UI to hopefully run smoothly as the application uses another thread to add temporal data to the log. If this is not doable, we will resort to a CNN. The application will then send the data to the server and wait for a response.
 
@@ -53,8 +53,3 @@ The application will most likely be an IOS application developed in swift. The a
     <br>
     <img src="https://avatars.githubusercontent.com/u/1082445?s=200&v=4" width="200" alt = "SSE">
 </h1>
-
-Led by Joseph Casale
-
-Contributors:
-TBD at first meeting
