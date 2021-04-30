@@ -8,7 +8,7 @@ const fs = require('fs');
 
 
 var app = express();
-const port = 12120;
+const port = 8080;//8443 for https
 // Security layer
 app.use(helmet());
 
@@ -56,6 +56,16 @@ function callPrediction(req, res){
 //define an endpoint
 app.get('/testpython', callPrediction);
 
+//we will get an SSL certificate -- I want to learn how to best secure that
+/*
+var https = require("https");
+var privateKey  = fs.readFileSync(__dirname+'/../sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync(__dirname+'/../sslcert/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(8443);
+*/
 app.listen(port, () =>{
     console.log('listening on port ' + port);
 });
