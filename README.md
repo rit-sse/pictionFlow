@@ -1,7 +1,7 @@
 ## PictionFlow
 <h1 align="center">
     <br>
-    <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logo.PNG" width="600" alt = "pictionflow">
+    <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logoPF.PNG" width="600" alt = "pictionflow">
 </h1>
 <h4 align="center" style="font-size:10000%:">An iOS (for the meantime) game for guessing doodles.</h4>
 
