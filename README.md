@@ -1,7 +1,7 @@
 ## PictionFlow
 <h1 align="center">
     <br>
-    <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logo.PNG" width="600" alt = "pictionflow">
+    <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logoPF.PNG" width="600" alt = "pictionflow">
 </h1>
 <h4 align="center" style="font-size:10000%:">An iOS (for the meantime) game for guessing doodles.</h4>
 
@@ -33,7 +33,7 @@ This will probably be in python. I've heard models can be saved in a file.
 <br>
 <h2 align="left"> API</h2>
 <p2 align="left">
-The API is a relative coin-toss at the moment in terms of language. It may be be written with either java's Spring framework, Python's Flask framework, or Node.js. I personally think Node.js is a good choice for experience. The API will essentially listen for data, have the server process the data, and send a response back.
+The API will be written with express Node.js. I personally think it's a good choice for experience. The API will essentially listen for data, have the server process the data, and send a response back.
 
 We will have to acquire an SSL certificate, and use HTTPS.
 
