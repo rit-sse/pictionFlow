@@ -3,7 +3,7 @@
     <br>
     <img src="https://github.com/rit-sse/pictionFlow/blob/master/images/logoPF.PNG" width="600" alt = "pictionflow">
 </h1>
-<h4 align="center" style="font-size:10000%:">An iOS (for the meantime) game for guessing doodles.</h4>
+<h4 align="center" style="font-size:10000%:">A multi-platform game for guessing doodles.</h4>
 
 <p align="center" style="font-size:180%;">
     PictionFlow will be a mobile application seeded with data from <a href="https://github.com/googlecreativelab/quickdraw-dataset" target="_blank">Quick, Draw!</a>
@@ -42,9 +42,9 @@ We will have to acquire an SSL certificate, and use HTTPS.
 <br>
 <h2 align="left">iOS/Android Application(Client)</h2>
 <p2 align="left">
-The application will most likely be an IOS application developed in swift. The application will employ a canvas that allows the user to draw. The application will likely have to be multi-threaded, as to allow the UI to hopefully run smoothly as the application uses another thread to add temporal data to the log. If this is not doable, we will resort to a CNN. The application will then send the data to the server and wait for a response.
+The application client-side is made in flutter with Dart code. The language itself is quite reminiscent of Java, so it's relatively easy to learn. Currently, we have a drawing canvas that stores data as a point, however we intend to make it more elegantly connected to the Model-View-Controller paradigm, as having a seperate file that contains all of the model data could prove quite useful for us. More research will have to be done.
 
->More on the application shortly.
+In Flutter, Widgets are the talk of the town, and flutter updates it's tree by doing depth-first traversal, this means we will have to be careful to keep this traversal as efficient as possible. The goal there is to learn methods for optimizing and controlling the nature of the traversal itself.
 </p2>
 </details>
 
