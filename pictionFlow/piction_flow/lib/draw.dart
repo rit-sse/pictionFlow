@@ -120,6 +120,7 @@ class Draw extends StatefulWidget {
     void paint(Canvas canvas, Size size){
       for(int i=0; i< pointsList.length-1; i++){
         var p = pointsList[i];
+        print(p.points);
         var p_1 = pointsList[i+1];
         if(pointsList[i] != null && pointsList[i+1] != null){
           canvas.drawLine(pointsList[i].points, pointsList[i+1].points,
