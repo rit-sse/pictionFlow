@@ -8,7 +8,7 @@ const fs = require('fs');
 
 
 var app = express();
-const port = 8080;//8443 for https
+const port = 12120;//8443 for https
 // Security layer
 app.use(helmet());
 
@@ -29,7 +29,7 @@ app.use(morgan('combined', {
 }));
 //app.get('path', function (appears to be a lambda commonly, but could pass a reference))
 app.get('/', (req, res) =>{
-    res.send("Welcome to my home");
+    res.send("<h1> hello</h1>");
 });
 
 //for using the python script:

@@ -146,6 +146,34 @@ def model_fn(features, labels, mode, params):
     ModelFnOps for Estimator API.
   """
 
+  # Build the model.
+  inks, lengths, labels = _get_input_tensors(features, labels)
+  convolved, lengths = _add_conv_layers(inks, lengths)
+  final_state = _add_rnn_layers(convolved, lengths)
+  logits = _add_fc_layers(final_state)
+  # Add the loss.
+  cross_entropy = tf.reduce_mean(
+      tf.nn.sparse_softmax_cross_entropy_with_logits(
+          labels=labels, logits=logits))
+  # Add the optimizer.
+  train_op = tf.contrib.layers.optimize_loss(
+      loss=cross_entropy,
+      global_step=tf.train.get_global_step(),
+      learning_rate=params.learning_rate,
+      optimizer="Adam",
+      # some gradient clipping stabilizes training in the beginning.
+      clip_gradients=params.gradient_clipping_norm,
+      summaries=["learning_rate", "loss", "gradients", "gradient_norm"])
+  # Compute current predictions.
+  predictions = tf.argmax(logits, axis=1)
+  return tf.estimator.EstimatorSpec(
+      mode=mode,
+      predictions={"logits": logits, "predictions": predictions},
+      loss=cross_entropy,
+      train_op=train_op,
+      eval_metric_ops={"accuracy": tf.metrics.accuracy(labels, predictions)})
+
+
   def _get_input_tensors(features, labels):
     """Converts the input dict into inks, lengths, and labels tensors."""
     # features[ink] is a sparse tensor that is [8, batch_maxlen, 3]
@@ -238,34 +266,6 @@ def model_fn(features, labels, mode, params):
     """Adds a fully connected layer."""
     return tf.layers.dense(final_state, params.num_classes)
 
-  # Build the model.
-  inks, lengths, labels = _get_input_tensors(features, labels)
-  convolved, lengths = _add_conv_layers(inks, lengths)
-  final_state = _add_rnn_layers(convolved, lengths)
-  logits = _add_fc_layers(final_state)
-  # Add the loss.
-  cross_entropy = tf.reduce_mean(
-      tf.nn.sparse_softmax_cross_entropy_with_logits(
-          labels=labels, logits=logits))
-  # Add the optimizer.
-  train_op = tf.contrib.layers.optimize_loss(
-      loss=cross_entropy,
-      global_step=tf.train.get_global_step(),
-      learning_rate=params.learning_rate,
-      optimizer="Adam",
-      # some gradient clipping stabilizes training in the beginning.
-      clip_gradients=params.gradient_clipping_norm,
-      summaries=["learning_rate", "loss", "gradients", "gradient_norm"])
-  # Compute current predictions.
-  predictions = tf.argmax(logits, axis=1)
-  return tf.estimator.EstimatorSpec(
-      mode=mode,
-      predictions={"logits": logits, "predictions": predictions},
-      loss=cross_entropy,
-      train_op=train_op,
-      eval_metric_ops={"accuracy": tf.metrics.accuracy(labels, predictions)})
-
-
 def create_estimator_and_specs(run_config):
   """Creates an Experiment configuration based on the estimator and input fn."""
   model_params = tf.contrib.training.HParams(
@@ -306,7 +306,6 @@ def main(unused_args):
           save_checkpoints_secs=300,
           save_summary_steps=100))
   tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
-  tf.estimator.predict
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
