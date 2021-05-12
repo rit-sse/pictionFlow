@@ -1,4 +1,5 @@
 const express = require('express');
+const predictRouter = require('./routes/predict');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -8,53 +9,22 @@ const fs = require('fs');
 
 
 var app = express();
-const port = 12120;//8443 for https
-// Security layer
+const port = 8080;//8443 for https
+
 app.use(helmet());
 
-// using bodyParser to parse JSON bodies into JS objects
 app.use(bodyParser.json());
 
-// enabling CORS for all requests
 app.use(cors());
 
-// adding morgan to log HTTP requests
-//const skipSuccess = (req, res)  => res.statusCode < 400;
-//adding to morgan use parameters as skip: skipSuccess is potentially helpful
+app.use('/predict', predictRouter)
+
 let logStream = fs.createWriteStream(path.join(__dirname,
     'logfile.log'), {flags: 'a'});
-
 app.use(morgan('combined', {
     stream: logStream
 }));
-//app.get('path', function (appears to be a lambda commonly, but could pass a reference))
-app.get('/', (req, res) =>{
-    res.send("<h1> hello</h1>");
-});
 
-//for using the python script:
-function callPrediction(req, res){
-    var spawn = require('child_process').spawn;
-    // Parameters passed in spawn -
-    // 1. type_of_script
-    // 2. list containing Path of the script
-    //    and arguments for the script 
-    
-    //http://localhost:12120/pythontest?data=FROMHTTP&(others)
-    var process = spawn('python', ["./src/test_script.py",
-                                    req.query.input]);
-
-    process.stdout.on('data', function(data){
-        res.send(data.toString());
-    })
-}
-
-
-
-//localhost:12120/testpython?input=HELLOO
-
-//define an endpoint
-app.get('/testpython', callPrediction);
 
 //we will get an SSL certificate -- I want to learn how to best secure that
 /*

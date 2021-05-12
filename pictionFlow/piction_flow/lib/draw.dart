@@ -41,9 +41,8 @@ class Draw extends StatefulWidget {
                       IconButton(
                           icon: Icon(Icons.clear),
                           onPressed: () {
-                            setState( () {
-                              points.clear();
-                      });
+                            onPressed();  
+            
                       }),
                     ],
             //)
@@ -99,6 +98,7 @@ class Draw extends StatefulWidget {
 
    }
 
+
   onPressed() {
      setState(() {
        points.clear();
@@ -120,9 +120,9 @@ class Draw extends StatefulWidget {
     void paint(Canvas canvas, Size size){
       for(int i=0; i< pointsList.length-1; i++){
         var p = pointsList[i];
-        print(p.points);
         var p_1 = pointsList[i+1];
         if(pointsList[i] != null && pointsList[i+1] != null){
+          print(p.points);
           canvas.drawLine(pointsList[i].points, pointsList[i+1].points,
             pointsList[i].paint);
         }else if(pointsList[i] == null && pointsList[i+1] == null){
