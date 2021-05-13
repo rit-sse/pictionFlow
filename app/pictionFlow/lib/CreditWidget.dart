@@ -10,6 +10,7 @@ class CreditWidget extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       child: Column(
         children: [
@@ -34,8 +35,8 @@ class CreditWidget extends StatelessWidget {
           Text("Joseph Casale and Quinn Trafas, RIT\n"),
         ],
       ),
-      width: 300,
-      height: 600,
+      width: 250,
+      height: 300,
       decoration: new BoxDecoration(
         color: Colors.grey[300],
         boxShadow: [
@@ -47,5 +48,7 @@ class CreditWidget extends StatelessWidget {
         ],
       ),
     );
+    
   }
+  
 }

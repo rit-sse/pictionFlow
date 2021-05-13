@@ -30,7 +30,7 @@ class InfoScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: PhysicsCardDrag(),
             padding: EdgeInsets.all(60.0),
-          )
+          ),
           //PhysicsCardDragDemo(),
         ],
       ),
