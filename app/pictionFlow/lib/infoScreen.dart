@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/physics.dart';
+import 'package:pictionFlow/CreditWidget.dart';
 import 'package:pictionFlow/homePage.dart';
 
 class InfoScreen extends StatelessWidget {
@@ -27,7 +28,7 @@ class InfoScreen extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            child: PhysicsCardDragDemo(),
+            child: PhysicsCardDrag(),
             padding: EdgeInsets.all(60.0),
           )
           //PhysicsCardDragDemo(),
@@ -37,13 +38,15 @@ class InfoScreen extends StatelessWidget {
   }
 }
 
-class PhysicsCardDragDemo extends StatelessWidget {
+class PhysicsCardDrag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: DraggableCard(
-        child:
-            FlipCard(front: Text("Joseph Casale"), back: Text("Quinn Trafas")),
+        child: FlipCard(
+            front:
+                CreditWidget("\t\t\t\t\t\t\t\t", "Joseph Casale, Quinn Trafas"),
+            back: Text("Wow I'm a back")),
       ),
     );
   }
