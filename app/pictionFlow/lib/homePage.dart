@@ -2,13 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:pictionFlow/infoScreen.dart';
-
+import 'package:pictionFlow/choosePage.dart';
+import 'choosePage.dart';
 import 'draw.dart';
 import 'draw.dart';
 import 'draw.dart';
 
 Widget makeImageButton(String text, double textSize, Color textColor, color1,
-    Color color2, double size, Draw action, BuildContext context) {
+    Color color2, double size, Widget action, BuildContext context) {
   return Card(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
@@ -38,7 +39,8 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
     ),
     InkWell(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Draw()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => action));
+
       },
       child: Container(
         width: size-1,
@@ -85,11 +87,11 @@ class HomePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          makeImageButton("Free Draw", 25, Colors.white,
-                              Colors.blue, Colors.purple, 75, Draw(), context),
-                          SizedBox(width: 100),
-                          makeImageButton("Free Draw", 25, Colors.white,
-                              Colors.blue, Colors.purple, 75, Draw(), context),
+                          makeImageButton("Draw!", 25, Colors.white,
+                              Colors.blue, Colors.purple, 120, Draw(), context),
+                          SizedBox(width: 40),
+                          makeImageButton("Pick!", 25, Colors.white,
+                              Colors.blue, Colors.purple, 120, ChoosePage(""), context),
                         ],
                       ),
                     ],
