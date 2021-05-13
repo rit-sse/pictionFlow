@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'draw.dart';
+
 class CurrentGuess extends StatefulWidget {
   @override
   _CurrentGuessState createState() => _CurrentGuessState();
@@ -57,12 +59,7 @@ class GuessCanvas extends StatelessWidget {
             SizedBox(height: 10),
             CurrentGuess(),
             SizedBox(height: 10),
-            Container(
-              color: Colors.white,
-              width:
-                  500, //figure out to have this just fit the reset of the screen
-              height: 500,
-            )
+            Draw(),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,8 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
         alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(
-              color: textColor, fontSize: textSize, fontFamily: 'Pangolin'),
+          style: TextStyle(color: textColor, fontSize: textSize),
+          textAlign: TextAlign.center,
         ),
       ),
     ),
@@ -33,42 +34,76 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
 
 class HomePage extends StatelessWidget {
   String drawObject;
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: FlipCard(
+      key: cardKey,
+      flipOnTouch: false,
+      direction: FlipDirection.HORIZONTAL,
+      front: Stack(children: [
+        Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment(0.8, 0.8),
+                colors: <Color>[Colors.indigo, Colors.white],
+                tileMode: TileMode.repeated),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(top: 25),
+            child: Column(
+              children: [
+                SizedBox(height: 100),
+                Image.asset(
+                  "assets/Profile.png",
+                ),
+                SizedBox(height: 50),
+                makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
+                    Colors.orange, 200, context),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    makeImageButton("Free Draw", 20, Colors.white, Colors.blue,
+                        Colors.purple, 75, context),
+                    SizedBox(width: 100),
+                    makeImageButton("Alpha 0.1", 20, Colors.white, Colors.blue,
+                        Colors.purple, 75, context),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomRight,
+          child: IconButton(
+            onPressed: () => cardKey.currentState.toggleCard(),
+            icon: Icon(Icons.info),
+            color: Colors.white,
+          ),
+        ),
+      ]),
+      back: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment(0.8, 0.8),
-              colors: <Color>[Colors.indigo, Colors.white],
+              colors: <Color>[Colors.blue, Colors.red],
               tileMode: TileMode.repeated),
         ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 25),
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/Profile.png",
-                width: 300,
-              ),
-              makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
-                  Colors.orange, 200, context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
-                      Colors.purple, 75, context),
-                  SizedBox(width: 100),
-                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
-                      Colors.purple, 75, context),
-                ],
-              )
-            ],
+        child: Align(
+          alignment: Alignment.bottomRight,
+          child: IconButton(
+            onPressed: () => cardKey.currentState.toggleCard(),
+            icon: Icon(Icons.info),
+            color: Colors.white,
           ),
         ),
       ),
-    );
+    ));
   }
 }

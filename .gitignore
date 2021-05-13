@@ -39,3 +39,4 @@ output.json
 .dart_tool/
 pubspec.lock
 doc/api/
+.packages
