@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget makeImageButton(
-    String text, Color color1, Color color2, BuildContext context) {
+Widget makeImageButton(String text, double textSize, Color textColor, color1,
+    Color color2, double size, BuildContext context) {
   return Card(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
@@ -10,8 +10,8 @@ Widget makeImageButton(
     ),
     margin: EdgeInsets.all(20),
     child: Container(
-      height: 200,
-      width: 200,
+      height: size,
+      width: size,
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -21,7 +21,11 @@ Widget makeImageButton(
       ),
       child: Container(
         alignment: Alignment.center,
-        child: Text(text, style: TextStyle(fontFamily: 'Pangolin')),
+        child: Text(
+          text,
+          style: TextStyle(
+              color: textColor, fontSize: textSize, fontFamily: 'Pangolin'),
+        ),
       ),
     ),
   );
@@ -45,8 +49,22 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.only(top: 25),
           child: Column(
             children: [
-              Image.asset("assets/Profile.png"),
-              makeImageButton("Play (AI)", Colors.red, Colors.orange, context),
+              Image.asset(
+                "assets/Profile.png",
+                width: 300,
+              ),
+              makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
+                  Colors.orange, 200, context),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
+                      Colors.purple, 75, context),
+                  SizedBox(width: 100),
+                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
+                      Colors.purple, 75, context),
+                ],
+              )
             ],
           ),
         ),

@@ -152,13 +152,13 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_application_1",
+      "name": "pictionFlow",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-05-13T03:28:03.522716Z",
+  "generated": "2021-05-13T03:52:50.084194Z",
   "generator": "pub",
   "generatorVersion": "2.12.3"
 }
