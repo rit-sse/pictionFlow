@@ -36,3 +36,6 @@ build/
 .navigation
 captures/
 output.json 
+.dart_tool/
+pubspec.lock
+doc/api/
