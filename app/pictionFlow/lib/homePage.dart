@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:pictionFlow/infoScreen.dart';
 
+import 'draw.dart';
+import 'draw.dart';
+import 'draw.dart';
+
 Widget makeImageButton(String text, double textSize, Color textColor, color1,
-    Color color2, double size, BuildContext context) {
+    Color color2, double size, Draw action, BuildContext context) {
   return Card(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(150),
     ),
     margin: EdgeInsets.all(20),
-    child: Container(
+    child: 
+    Stack(
+      children: [Container(
       height: size,
       width: size,
       padding: EdgeInsets.all(8),
@@ -30,6 +36,19 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
         ),
       ),
     ),
+    InkWell(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Draw()));
+      },
+      child: Container(
+        width: size-1,
+        height: size-1,
+      ),
+    ),
+    
+      ],
+  
+  ),
   );
 }
 
@@ -62,15 +81,15 @@ class HomePage extends StatelessWidget {
                         width: 300,
                       ),
                       makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
-                          Colors.orange, 200, context),
+                          Colors.orange, 200, Draw(), context),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           makeImageButton("Free Draw", 25, Colors.white,
-                              Colors.blue, Colors.purple, 75, context),
+                              Colors.blue, Colors.purple, 75, Draw(), context),
                           SizedBox(width: 100),
                           makeImageButton("Free Draw", 25, Colors.white,
-                              Colors.blue, Colors.purple, 75, context),
+                              Colors.blue, Colors.purple, 75, Draw(), context),
                         ],
                       ),
                     ],
