@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
+import 'package:pictionFlow/infoScreen.dart';
 
 Widget makeImageButton(String text, double textSize, Color textColor, color1,
     Color color2, double size, BuildContext context) {
@@ -33,42 +35,59 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
 
 class HomePage extends StatelessWidget {
   String drawObject;
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment(0.8, 0.8),
-              colors: <Color>[Colors.indigo, Colors.white],
-              tileMode: TileMode.repeated),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 25),
-          child: Column(
+      body: FlipCard(
+          key: cardKey,
+          flipOnTouch: false,
+          front: Stack(
             children: [
-              Image.asset(
-                "assets/Profile.png",
-                width: 300,
+              Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment(0.8, 0.8),
+                      colors: <Color>[Colors.indigo, Colors.white],
+                      tileMode: TileMode.repeated),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(top: 25),
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/Profile.png",
+                        width: 300,
+                      ),
+                      makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
+                          Colors.orange, 200, context),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          makeImageButton("Free Draw", 25, Colors.white,
+                              Colors.blue, Colors.purple, 75, context),
+                          SizedBox(width: 100),
+                          makeImageButton("Free Draw", 25, Colors.white,
+                              Colors.blue, Colors.purple, 75, context),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
-                  Colors.orange, 200, context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
-                      Colors.purple, 75, context),
-                  SizedBox(width: 100),
-                  makeImageButton("Free Draw", 25, Colors.white, Colors.blue,
-                      Colors.purple, 75, context),
-                ],
-              )
+              Align(
+                child: IconButton(
+                  icon: Icon(Icons.info),
+                  onPressed: () => cardKey.currentState.toggleCard(),
+                  color: Colors.white,
+                ),
+                alignment: Alignment.bottomRight,
+              ),
             ],
           ),
-        ),
-      ),
+          back: InfoScreen(cardKey)),
     );
   }
 }
