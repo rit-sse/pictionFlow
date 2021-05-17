@@ -1,16 +1,25 @@
 var user = require('../schemas/user')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
-var logger = require('../logs/logger')
+var logger = require('../logging/logger')
 const { getLogger } = require('log4js')
 
 const userlogger = getLogger('userLogger')
 var functions = {
-    addNew: function (req, res) {        
+    addNew: async function (req, res) {  
+        
+
         if((!req.body.userid) || (!req.body.userCode)){
-            res.json({success: false, msg: 'missing a field'})
-            
+            return res.json({success: false, msg: 'missing a field'})
         }
+        const exists = await user.exists({
+            "userid": req.body.userid
+        })
+        if(exists){
+            console.log(req.body.userid)
+            res.json({success: false, msg: "user already exists"})
+        }
+    
         else {
             var newUser = user({
                 userid: req.body.userid,
@@ -30,13 +39,21 @@ var functions = {
     authenticate: function(req, res){
         user.findOne({
             userid: req.body.userid
-        }, function (err, user) {
+        }, function (err, found) {
             if(err) throw err
-            if(!user){
+            if(!found){
                 res.status(403).send({success: false, msg: 'Authentication Failed No User Found'})
             }
             else {
-                //compare and validate user
+                found.compareCode(req.body.userCode, function(err, isMatch){
+                    if(isMatch && !err){
+                        var token = jwt.encode(user, config.secret)
+                        res.json({success: true, token: token})
+                    }
+                    else {
+                        return res.status(403).send({success: false, msg: 'Authentication failed. Wrong code for user'})
+                    }
+                })
             }
         }
         )
