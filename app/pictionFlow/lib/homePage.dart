@@ -10,22 +10,27 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
       borderRadius: BorderRadius.circular(150),
     ),
     margin: EdgeInsets.all(20),
-    child: Container(
-      height: size,
-      width: size,
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [color1, color2],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
-      ),
+    child: InkWell(
+      onTap: () {
+        print("TEST");
+      },
       child: Container(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: TextStyle(color: textColor, fontSize: textSize),
-          textAlign: TextAlign.center,
+        height: size,
+        width: size,
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: [color1, color2],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight),
+        ),
+        child: Container(
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            style: TextStyle(color: textColor, fontSize: textSize),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     ),
@@ -67,10 +72,10 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     makeImageButton("Free Draw", 20, Colors.white, Colors.blue,
-                        Colors.purple, 75, context),
+                        Colors.purple, 100, context),
                     SizedBox(width: 100),
                     makeImageButton("Alpha 0.1", 20, Colors.white, Colors.blue,
-                        Colors.purple, 75, context),
+                        Colors.purple, 100, context),
                   ],
                 ),
               ],
@@ -87,23 +92,40 @@ class HomePage extends StatelessWidget {
         ),
       ]),
       back: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment(0.8, 0.8),
-              colors: <Color>[Colors.blue, Colors.red],
-              tileMode: TileMode.repeated),
-        ),
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: IconButton(
-            onPressed: () => cardKey.currentState.toggleCard(),
-            icon: Icon(Icons.info),
-            color: Colors.white,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment(0.8, 0.8),
+                colors: <Color>[Colors.blue[300], Colors.green[50]],
+                tileMode: TileMode.repeated),
           ),
-        ),
-      ),
+          child: Stack(
+            children: [
+              Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Joe C"),
+                      SizedBox(height: 20),
+                      Text("Quinn T"),
+                      SizedBox(height: 100),
+                      Text("https://github.com/rit-sse/pictionFlow"),
+                      SizedBox(height: 20),
+                      Text("Supported by SSE")
+                    ],
+                  )),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                  onPressed: () => cardKey.currentState.toggleCard(),
+                  icon: Icon(Icons.home),
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          )),
     ));
   }
 }
