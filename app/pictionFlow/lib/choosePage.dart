@@ -78,9 +78,6 @@ class ChoosePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("pictionFlow"),
-      ),
       body: Container(
           padding: EdgeInsets.all(20),
           color: Colors.indigo[300],
@@ -88,9 +85,10 @@ class ChoosePage extends StatelessWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
+                SizedBox(height: 50),
                 text("Pick an object to draw!", Colors.indigo[300],
                     Colors.black, 300, 300, 30, 100, 30, 1),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 Flexible(
                   child: GridView.count(
                     crossAxisCount: 2,
