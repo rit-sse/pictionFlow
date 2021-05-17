@@ -16,41 +16,39 @@ Widget makeImageButton(String text, double textSize, Color textColor, color1,
       borderRadius: BorderRadius.circular(150),
     ),
     margin: EdgeInsets.all(20),
-    child: 
-    Stack(
-      children: [Container(
-      height: size,
-      width: size,
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [color1, color2],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight),
-      ),
-      child: Container(
-        alignment: Alignment.center,
-        child: Text(
-          text,
-          style: TextStyle(
-              color: textColor, fontSize: textSize, fontFamily: 'Pangolin'),
+    child: Stack(
+      children: [
+        Container(
+          height: size,
+          width: size,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: [color1, color2],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight),
+          ),
+          child: Container(
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              style: TextStyle(
+                  color: textColor, fontSize: textSize, fontFamily: 'Pangolin'),
+            ),
+          ),
         ),
-      ),
-    ),
-    InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => action));
-
-      },
-      child: Container(
-        width: size-1,
-        height: size-1,
-      ),
-    ),
-    
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => action));
+          },
+          child: Container(
+            width: size - 1,
+            height: size - 1,
+          ),
+        ),
       ],
-  
-  ),
+    ),
   );
 }
 
@@ -78,10 +76,11 @@ class HomePage extends StatelessWidget {
                   padding: EdgeInsets.only(top: 25),
                   child: Column(
                     children: [
+                      SizedBox(height: 100),
                       Image.asset(
                         "assets/Profile.png",
-                        width: 300,
                       ),
+                      SizedBox(height: 50),
                       makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
                           Colors.orange, 200, Draw(), context),
                       Row(
@@ -90,8 +89,15 @@ class HomePage extends StatelessWidget {
                           makeImageButton("Draw!", 25, Colors.white,
                               Colors.blue, Colors.purple, 120, Draw(), context),
                           SizedBox(width: 40),
-                          makeImageButton("Pick!", 25, Colors.white,
-                              Colors.blue, Colors.purple, 120, ChoosePage(""), context),
+                          makeImageButton(
+                              "Pick!",
+                              25,
+                              Colors.white,
+                              Colors.blue,
+                              Colors.purple,
+                              120,
+                              ChoosePage(""),
+                              context),
                         ],
                       ),
                     ],
