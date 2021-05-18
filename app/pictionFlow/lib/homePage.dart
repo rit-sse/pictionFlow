@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
-import 'package:pictionFlow/infoScreen.dart';
-import 'package:pictionFlow/choosePage.dart';
+import 'package:piction_flow/infoScreen.dart';
+import 'package:piction_flow/choosePage.dart';
 import 'choosePage.dart';
 import 'draw.dart';
 import 'draw.dart';
 import 'draw.dart';
+import 'httpPage.dart';
 
 Widget makeImageButton(String text, double textSize, Color textColor, color1,
     Color color2, double size, Widget action, BuildContext context) {
@@ -69,7 +70,10 @@ class HomePage extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment(0.8, 0.8),
-                      colors: <Color>[Colors.indigo, Colors.white],
+                      colors: <Color>[
+                        Colors.deepPurple[400],
+                        Colors.yellow[50]
+                      ],
                       tileMode: TileMode.repeated),
                 ),
                 child: Padding(
@@ -82,18 +86,25 @@ class HomePage extends StatelessWidget {
                       ),
                       SizedBox(height: 50),
                       makeImageButton("Play (AI)", 40, Colors.white, Colors.red,
-                          Colors.orange, 200, Draw(), context),
+                          Colors.orange, 200, HttpPage(), context),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          makeImageButton("Draw!", 25, Colors.white,
-                              Colors.blue, Colors.purple, 120, Draw(), context),
+                          makeImageButton(
+                              "Draw!",
+                              25,
+                              Colors.white,
+                              Colors.indigo,
+                              Colors.purple,
+                              120,
+                              Draw(),
+                              context),
                           SizedBox(width: 40),
                           makeImageButton(
                               "Pick!",
                               25,
                               Colors.white,
-                              Colors.blue,
+                              Colors.indigo,
                               Colors.purple,
                               120,
                               ChoosePage(""),

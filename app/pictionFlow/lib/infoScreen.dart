@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/physics.dart';
-import 'package:pictionFlow/CreditWidget.dart';
-import 'package:pictionFlow/homePage.dart';
+import 'package:piction_flow/CreditWidget.dart';
+import 'package:piction_flow/homePage.dart';
 
 class InfoScreen extends StatelessWidget {
   GlobalKey<FlipCardState> cardKey;
