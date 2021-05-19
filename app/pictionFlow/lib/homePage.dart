@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:piction_flow/drawPage.dart';
 import 'package:piction_flow/infoScreen.dart';
 import 'package:piction_flow/choosePage.dart';
+import 'package:provider/provider.dart';
 import 'choosePage.dart';
-import 'draw.dart';
-import 'draw.dart';
-import 'draw.dart';
+import 'drawFiles/points_state.dart';
 import 'httpPage.dart';
 
 Widget makeImageButton(String text, double textSize, Color textColor, color1,
@@ -97,7 +97,10 @@ class HomePage extends StatelessWidget {
                               Colors.indigo,
                               Colors.purple,
                               120,
-                              Draw(),
+                              ChangeNotifierProvider(
+                                create: (_) => CanvasPathsState(),
+                                child: DrawPage(title: 'Test'),
+                              ),
                               context),
                           SizedBox(width: 40),
                           makeImageButton(
