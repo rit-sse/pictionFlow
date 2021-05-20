@@ -4,8 +4,13 @@ import 'points_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+var color;
+
 class CurrentPathPaint extends StatelessWidget {
-  const CurrentPathPaint();
+  CurrentPathPaint(Color newColor) {
+    color = newColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     CurrentPathState currentPointsState =
@@ -54,6 +59,7 @@ class CurrentPathPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..isAntiAlias = true
+      ..color = color
       ..strokeWidth = 3.0
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;

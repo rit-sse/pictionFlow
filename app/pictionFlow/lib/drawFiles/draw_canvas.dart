@@ -6,6 +6,12 @@ import 'package:provider/provider.dart';
 import 'points_state.dart';
 import 'current_path_paint.dart';
 
+var color = Colors.red;
+
+void changeColor(Color newColor) {
+  color = newColor;
+}
+
 class DrawCanvas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -33,12 +39,16 @@ class DrawCanvas extends StatelessWidget {
                   ]),
               child: ChangeNotifierProvider(
                 create: (_) => CurrentPathState(),
-                child: const CurrentPathPaint(),
+                child: CurrentPathPaint(color),
               )),
         ),
         Container(
-          height: MediaQuery.of(context).size.height - 680,
-        )
+            height: MediaQuery.of(context).size.height - 680,
+            child: IconButton(
+              icon: Icon(Icons.info),
+              onPressed: () => changeColor(Colors.blue),
+              color: Colors.black,
+            )),
       ],
     );
   }
@@ -53,7 +63,7 @@ class DrawzoCanvasPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..strokeWidth = 3.0
-      ..color = Colors.black
+      ..color = color
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
 
