@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 class CurrentPathPaint extends StatelessWidget {
   const CurrentPathPaint();
-
   @override
   Widget build(BuildContext context) {
     CurrentPathState currentPointsState =
@@ -30,9 +29,15 @@ class CurrentPathPaint extends StatelessWidget {
       child: GestureDetector(
           onPanStart: (details) =>
               currentPointsState.addPoint(details.localPosition),
-          onPanUpdate: (details) =>
-              currentPointsState.addPoint(details.localPosition),
+          onPanUpdate: (details) {
+            if (details.localPosition.dy < 600 &&
+                details.localPosition.dy > 0) {
+              currentPointsState.addPoint(details.localPosition);
+            }
+          },
           onPanEnd: (details) {
+            print("redrawing");
+            print(mainPointsState.points.length);
             mainPointsState.addPath(currentPointsState.points);
             currentPointsState.resetPoints();
           }),
@@ -52,7 +57,6 @@ class CurrentPathPainter extends CustomPainter {
       ..strokeWidth = 3.0
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
-
     canvas.drawPoints(PointMode.polygon, points, paint);
   }
 

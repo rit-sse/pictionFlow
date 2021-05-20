@@ -9,21 +9,38 @@ import 'current_path_paint.dart';
 class DrawCanvas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<CanvasPathsState>(
-        builder: (_, model, child) => Stack(fit: StackFit.expand, children: [
-              RepaintBoundary(
-                child: CustomPaint(
-                  isComplex: true,
-                  painter: DrawzoCanvasPainter(model.points),
-                  child: Container(),
-                ),
-              ),
-              child
-            ]),
-        child: ChangeNotifierProvider(
-          create: (_) => CurrentPathState(),
-          child: const CurrentPathPaint(),
-        ));
+    return Column(
+      children: [
+        AppBar(
+          leading: Icon(Icons.menu),
+          leadingWidth: 50,
+          foregroundColor: Colors.purple,
+        ),
+        Container(
+          height: 600,
+          color: Colors.white,
+          child: Consumer<CanvasPathsState>(
+              builder: (_, model, child) =>
+                  Stack(fit: StackFit.expand, children: [
+                    RepaintBoundary(
+                      child: CustomPaint(
+                        isComplex: true,
+                        painter: DrawzoCanvasPainter(model.points),
+                        child: Container(),
+                      ),
+                    ),
+                    child
+                  ]),
+              child: ChangeNotifierProvider(
+                create: (_) => CurrentPathState(),
+                child: const CurrentPathPaint(),
+              )),
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height - 680,
+        )
+      ],
+    );
   }
 }
 
