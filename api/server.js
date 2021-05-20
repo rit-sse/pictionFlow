@@ -2,10 +2,10 @@ const express = require('express')
 const morgan = require('morgan')
 const connectDB = require('./config/db')
 const passport = require('passport')
-const bodyParser = require('body-parser')
 const helmet = require('helmet')
 const cors = require('cors')
 const routes = require('./routes')
+
 connectDB()
 
 const app = express()

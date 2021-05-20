@@ -13,6 +13,7 @@ var userSchema = new Schema( {
 
 })
 //prehook to encrypt before save
+
 userSchema.pre('save', function(next) {
     var user = this;
     if(this.isNew){
