@@ -40,3 +40,4 @@ output.json
 pubspec.lock
 doc/api/
 .packages
+data/
